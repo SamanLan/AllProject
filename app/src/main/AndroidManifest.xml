@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity"
-            android:allowTaskReparenting="true"></activity>
+            android:allowTaskReparenting="true"
+            android:taskAffinity="com.lansaman.allproject.new"></activity>
     </application>
 
 </manifest>
