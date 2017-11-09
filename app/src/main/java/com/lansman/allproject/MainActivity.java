@@ -2,6 +2,11 @@ package com.lansman.allproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -10,18 +15,28 @@ import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.internal.fuseable.ConditionalSubscriber;
 import io.reactivex.internal.schedulers.NewThreadScheduler;
+import io.reactivex.internal.subscriptions.ArrayCompositeSubscription;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.schedulers.Timed;
+import io.reactivex.subjects.CompletableSubject;
+
+import static com.jakewharton.rxbinding2.widget.RxTextView.textChanges;
 
 public class MainActivity extends AppCompatActivity {
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         deal();
+        button();
     }
 
     private void deal() {
@@ -31,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("订阅在" + Thread.currentThread().getName());
                 e.onComplete();
             }
-        }).subscribeOn(new NewThreadScheduler())
+        }).delay(5,TimeUnit.SECONDS)
+                .subscribeOn(new NewThreadScheduler())
                 .map(new Function<Object, Integer>() {
                     @Override
                     public Integer apply(@NonNull Object o) throws Exception {
@@ -48,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         observable.subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-
+                compositeDisposable.add(d);
             }
 
             @Override
@@ -98,5 +114,41 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("完成");
                     }
                 });
+    }
+
+    private void button() {
+        Observable observable = RxTextView.textChanges(((TextView) findViewById(R.id.text)));
+
+        observable.subscribe(new Observer<CharSequence>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                System.out.println("加入");
+                compositeDisposable.add(d);
+            }
+
+            @Override
+            public void onNext(@NonNull CharSequence charSequence) {
+                System.out.println(charSequence);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (compositeDisposable != null) {
+            System.out.println("移除");
+            compositeDisposable.dispose();
+        }
     }
 }
