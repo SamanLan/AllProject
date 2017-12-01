@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.lansman.allproject.MainActivity">
 
@@ -22,5 +22,36 @@
         android:text="123"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <com.lansman.allproject.RadioButtonWithRedPoint
+        android:drawableTop="@mipmap/ic_launcher"
+        android:layout_width="350dp"
+        android:layout_height="350dp" />
+
+    <android.support.design.widget.TabLayout
+android:background="@color/colorAccent"
+        app:tabIndicatorColor="#ffffff"
+        app:tabSelectedTextColor="#ffffff"
+        app:tabTextAppearance="@android:style/TextAppearance.Holo.Large"
+        app:tabTextColor="#F3ABAC"
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+        <android.support.design.widget.TabItem
+        android:text="123"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <android.support.design.widget.TabItem
+            android:text="123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TabLayout>
+
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </WebView>
 
 </LinearLayout>
