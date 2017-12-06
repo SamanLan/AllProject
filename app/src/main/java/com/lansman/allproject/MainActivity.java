@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
 //        web();
 //        testConcat();
 //        pay();
-        merge();
+//        merge();
+//        flatmap();
+        zip();
     }
 
     private void web() {
@@ -391,6 +393,94 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete() {
                 System.out.println("完成-----");
+            }
+        });
+    }
+
+    private Observable<User> login() {
+        return Observable.create(new ObservableOnSubscribe<User>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<User> e) throws Exception {
+                e.onNext(new User(2));
+            }
+        });
+    }
+
+    private Observable<Boolean> comment(final int id){
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
+                if (id > 0) {
+                    e.onNext(true);
+                }
+            }
+        });
+    }
+
+    private void flatmap() {
+        login().flatMap(new Function<User, ObservableSource<Boolean>>() {
+            @Override
+            public ObservableSource<Boolean> apply(@NonNull User user) throws Exception {
+                System.out.println("用户id" + user.uID);
+                return comment(user.uID);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Boolean o) {
+                System.out.println("评论" + o);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    private class User {
+        public int uID;
+
+        public User(int uID) {
+            this.uID = uID;
+        }
+    }
+
+    private void zip() {
+        Observable.zip(getComment(), getFromNet(), new BiFunction<Object, Integer, Object>() {
+            @Override
+            public Object apply(@NonNull Object o, @NonNull Integer integer) throws Exception {
+                System.out.println("中间合并分别是" + o.toString() + "和" + integer);
+                return o.toString() + integer;
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Object o) {
+                System.out.println("结果" + o);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
     }
