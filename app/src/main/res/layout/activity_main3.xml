@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lansman.allproject.MainActivity">
+    tools:context="com.lansman.allproject.Main3Activity">
 
     <Button
-        android:onClick="say"
+        android:text="正向"
+        android:id="@+id/b1"
+        android:onClick="click"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="do" />
+        android:layout_height="wrap_content" />
 
     <Button
-        android:onClick="fix"
+        android:text="反向"
+        android:id="@+id/b2"
+        android:onClick="click"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="修复" />
-
+        android:layout_height="wrap_content" />
 </LinearLayout>
