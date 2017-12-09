@@ -11,6 +11,17 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        ClassLoader classLoader = getClassLoader();
+        while (true) {
+            if (classLoader != null) {
+                System.out.println("----" + classLoader);
+                classLoader = classLoader.getParent();
+            } else {
+                System.out.println("55555");
+                break;
+            }
+        }
+
     }
 
     public void click(View view) {
