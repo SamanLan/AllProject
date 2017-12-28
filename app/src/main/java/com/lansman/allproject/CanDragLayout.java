@@ -3,12 +3,16 @@ package com.lansman.allproject;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ScrollerCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.lang.reflect.Field;
+
 
 /**
  * Author：zixin on 2017/10/19 14:14
@@ -25,18 +29,12 @@ public class CanDragLayout extends LinearLayout {
      */
     private ViewDragHelper draggerHelper;
 
-    /**
-     * 可滑动的内容view
-     */
-    private View contentView;
+    private boolean refreshFlag = true;
 
-    /**
-     * 原始位置
-     */
-    private Point autoSlidePoint = new Point();
+    private Point lastPoint = new Point();
 
     public CanDragLayout(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public CanDragLayout(Context context, @Nullable final AttributeSet attrs) {
@@ -45,7 +43,7 @@ public class CanDragLayout extends LinearLayout {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
                 // 只可以滑这个view
-                if (child == contentView) {
+                if (child instanceof WishAnimatorView) {
                     return true;
                 }
                 return false;
@@ -55,45 +53,53 @@ public class CanDragLayout extends LinearLayout {
             public int clampViewPositionHorizontal(View child, int left, int dx) {
                 // 左右滑动的距离
                 int leftSide = getPaddingLeft();
-                int bottomSide = getWidth() - getPaddingRight() - contentView.getWidth();
-                return Math.min(Math.max(left, leftSide), bottomSide);
+                int bottomSide = getWidth() - getPaddingRight() - child.getWidth();
+                return left;
             }
 
             @Override
             public int clampViewPositionVertical(View child, int top, int dy) {
                 // 上下可滑动的距离
                 int topSide = getPaddingTop();
-                int bottomSide = getHeight() - getPaddingBottom() - contentView.getHeight();
+                int bottomSide = getHeight() - getPaddingBottom() - child.getHeight();
                 return Math.min(Math.max(top, topSide), bottomSide);
             }
 
             @Override
             public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
                 super.onViewPositionChanged(changedView, left, top, dx, dy);
+                System.out.println(changedView.getTop()+"---"+changedView.getY()+"----"+changedView.getTranslationY());
+                if (refreshFlag) {
+                    refreshFlag = false;
+                    lastPoint.y = top;
+                    lastPoint.x = left;
+                }
+            }
+
+            @Override
+            public int getViewVerticalDragRange(View child) {
+                return getMeasuredHeight()-child.getMeasuredHeight();
+            }
+
+            @Override
+            public int getViewHorizontalDragRange(View child) {
+                return 0;
             }
 
             //手指释放的时候回调
             @Override
             public void onViewReleased(View releasedChild, float xvel, float yvel) {
-                //contentView手指释放时可以自动回去
-                if (releasedChild == contentView) {
-                    if (releasedChild.getLeft() + releasedChild.getWidth() / 2 > getWidth() / 2) {
-                        autoSlidePoint.x = getWidth() - getPaddingRight() - releasedChild.getWidth();
-                    }  else {
-                        autoSlidePoint.x = getPaddingLeft();
-                    }
-                    autoSlidePoint.y = releasedChild.getTop();
-                    draggerHelper.settleCapturedViewAt(autoSlidePoint.x, autoSlidePoint.y);
-                    invalidate();
-                }
+                //手指释放时可以自动回去
+                draggerHelper.settleCapturedViewAt(lastPoint.x, lastPoint.y);
+                refreshFlag = true;
+                invalidate();
             }
         });
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        contentView = findViewById(R.id.can_drag_content);
+        try {
+            replaceInterpolator(context,draggerHelper);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -117,5 +123,12 @@ public class CanDragLayout extends LinearLayout {
         if (draggerHelper.continueSettling(true)) {
             invalidate();
         }
+    }
+
+    private static void replaceInterpolator(Context context, ViewDragHelper helper) throws NoSuchFieldException, IllegalAccessException {
+        Class cla = helper.getClass();
+        Field scroller = cla.getDeclaredField("mScroller");
+        scroller.setAccessible(true);
+        scroller.set(helper, ScrollerCompat.create(context, new JellyInterpolator()));
     }
 }

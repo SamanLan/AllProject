@@ -5,37 +5,20 @@
     android:layout_width="match_parent"
     android:id="@+id/content"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.lansman.allproject.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/can_drag_content"
+    <com.lansman.allproject.WishAnimatorView
+        android:src="@mipmap/ic_launcher_round"
         android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:orientation="vertical">
-
-        <com.lansman.allproject.EdgeTransparentView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/alc_notify_content_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/almanac_notify_content_bg"
-                android:drawableLeft="@drawable/almanac_notify_content_up"
-                android:drawablePadding="6dp"
-                android:paddingBottom="4dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="4dp"
-                android:text="@string/almanac_notify_up"
-                android:textColor="#fff" />
-        </com.lansman.allproject.EdgeTransparentView>
+        android:layout_height="70dp" />
 
 
-    </LinearLayout>
-
-
+    <com.lansman.allproject.WishAnimatorView
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+    <com.lansman.allproject.WishAnimatorView
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
 </com.lansman.allproject.CanDragLayout>

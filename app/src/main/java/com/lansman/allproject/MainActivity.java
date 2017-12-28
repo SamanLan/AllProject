@@ -16,15 +16,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("------"+isMainActivityAlive(MainActivity.this,"com.lansman.allproject.MainActivity"));
-                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
-            }
-        }, 5000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("------"+isMainActivityAlive(MainActivity.this,"com.lansman.allproject.MainActivity"));
+//                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                getApplicationContext().startActivity(intent);
+//            }
+//        }, 5000);
     }
 
     private boolean isMainActivityAlive(Context context, String activityName){
