@@ -28,11 +28,6 @@ public class BookService extends Service {
         @Override
         public void say() throws RemoteException {
             System.out.println("-----say" + Thread.currentThread().getName());
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

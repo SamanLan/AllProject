@@ -11,8 +11,10 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 import saman.com.base.Book;
 import saman.com.origin.IBookAidlInterface;
@@ -233,5 +235,23 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction("book");
         intent.setPackage("saman.com.origin");
         bindService(intent, connection, BIND_AUTO_CREATE);
+    }
+
+    public void dododo(View view) {
+        LauncherHelper.TestManager manager = new LauncherHelper.TestManager();
+        try {
+            manager.deal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void other(View view) {
+//        startActivity(new Intent(this, Main2Activity.class));
+        try {
+            new LauncherHelper().getLM(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
