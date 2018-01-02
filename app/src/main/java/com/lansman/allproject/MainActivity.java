@@ -2,8 +2,6 @@ package com.lansman.allproject;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 //                getApplicationContext().startActivity(intent);
 //            }
 //        }, 5000);
+        ((WishDragLayout) findViewById(R.id.content)).setCallBack((WishBgAinmatorView) findViewById(R.id.drawPanel));
     }
 
     private boolean isMainActivityAlive(Context context, String activityName){

@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lansman.allproject.CanDragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/content"
-    android:layout_height="match_parent"
-    tools:context="com.lansman.allproject.MainActivity">
+    android:layout_height="match_parent">
 
-    <com.lansman.allproject.WishAnimatorView
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+    <com.lansman.allproject.WishDragLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <com.lansman.allproject.WishAnimatorView
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
-    <com.lansman.allproject.WishAnimatorView
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
-</com.lansman.allproject.CanDragLayout>
+        <com.lansman.allproject.WishAnimatorView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="46dp"
+            android:clickable="true"
+            android:src="@drawable/wish" />
+
+
+        <com.lansman.allproject.WishAnimatorView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="78dp"
+            android:clickable="true"
+            android:src="@drawable/wish" />
+
+        <com.lansman.allproject.WishAnimatorView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:clickable="true"
+            android:src="@drawable/wish" />
+
+        <com.lansman.allproject.WishAnimatorView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="66dp"
+            android:clickable="true"
+            android:src="@drawable/wish" />
+
+        <com.lansman.allproject.WishAnimatorView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="98dp"
+            android:clickable="true"
+            android:src="@drawable/wish" />
+    </com.lansman.allproject.WishDragLayout>
+
+    <com.lansman.allproject.WishBgAinmatorView
+        android:id="@+id/drawPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
