@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AllProject</string>
+    <string name="app_desc">该功能防止应用崩溃导致系统重启</string>
 </resources>

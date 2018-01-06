@@ -2,20 +2,40 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lansman.allproject">
 
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label=" "
+        android:icon="@android:color/transparent"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:excludeFromRecents ="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:label="崩溃安全"
+            android:name=".JumpYiJumpService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <!-- 服务参数设置 -->
+            <!-- 方法一:4.0之后提供了可以通过<meta-data>标签进行配置 -->
+            <!-- 方法二:通过setServiceInfo()进行配置 -->
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
+        </service>
     </application>
 
 </manifest>
