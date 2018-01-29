@@ -1,8 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+//import org.aspectj.bridge.IMessage
+//import org.aspectj.bridge.MessageHandler
+//import org.aspectj.tools.ajc.Main
 
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url MAVEN_URL
+            credentials {
+                username MAVEN_USERNAME
+                password MAVEN_PASSWORD
+            }
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
@@ -15,6 +26,14 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url MAVEN_URL
+            credentials {
+                username MAVEN_USERNAME
+                password MAVEN_PASSWORD
+            }
+        }
     }
 }
 
