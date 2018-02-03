@@ -8,45 +8,99 @@
     tools:context="com.lansman.allproject.camera.ColorActivity">
 
     <ImageView
-        android:src="@mipmap/color_bg"
         android:id="@+id/iv_content"
         android:layout_width="150dp"
         android:layout_height="200dp"
-        android:layout_gravity="center" />
-
-    <SeekBar
-        android:id="@+id/sb_R"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:max="256"
-        android:progress="0" />
-
-    <SeekBar
-        android:id="@+id/sb_G"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:max="256"
-        android:progress="0" />
-
-    <SeekBar
-        android:id="@+id/sb_B"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:max="256"
-        android:progress="0" />
+        android:layout_gravity="center"
+        android:src="@mipmap/color_bg" />
 
     <LinearLayout
-        android:layout_marginTop="17dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="亮度"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="R" />
+
+        <SeekBar
+            android:id="@+id/sb_R"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="256"
+            android:progress="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="G" />
+
+        <SeekBar
+            android:id="@+id/sb_G"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="256"
+            android:progress="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B" />
+
+        <SeekBar
+            android:id="@+id/sb_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="256"
+            android:progress="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="色相" />
+
+        <SeekBar
+            android:id="@+id/sb_sexiang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="256"
+            android:progress="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="亮度" />
+
         <SeekBar
             android:id="@+id/sb_light"
             android:layout_width="match_parent"
@@ -56,14 +110,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="17dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="饱和度"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="饱和度" />
+
         <SeekBar
             android:id="@+id/sb_full"
             android:layout_width="match_parent"
@@ -71,4 +127,8 @@
             android:max="256"
             android:progress="0" />
     </LinearLayout>
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Spinner>
 </LinearLayout>
